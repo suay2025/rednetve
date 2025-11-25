@@ -1,0 +1,22 @@
+:root {
+    --main-bg-color:  #6500DB;
+    --main-btn-color: #FC5E27;
+    --main-bg-footer: #FC5E27;
+}
+
+.navigationMap{
+    background-color: var(--main-bg-color);
+    width: 100%;
+    height: auto;
+    color: #fff;
+    bottom: 0;
+}
+
+.logoNM {
+    display: flex;
+    margin: auto;
+    text-align: center;
+    align-items: center;
+    padding: 20px;
+    margin-top: 20px;
+}

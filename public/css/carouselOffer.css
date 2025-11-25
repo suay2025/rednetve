@@ -1,0 +1,118 @@
+/* Importing Google fonts - Inter */
+/* @import url('https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,100..900&display=swap'); */
+
+:root {
+    --main-bg-color:  #4447eb;
+    --main-btn-color: #FC5E27;
+    --main-footer-color: #FFCC2A;
+}
+
+.carouselOffer{
+    background-color: var(--main-footer-color);
+    width: 100%;
+}
+
+.showProductCard {
+    width: 32rem!important;
+}
+
+.bodyCarouselOffer {
+    width: 100%;
+}
+
+.cardO-wrapper{
+    margin: 0;
+    font-family: "Inter", sans-serif;
+    width: 100%!important;
+    overflow: hidden;
+}
+
+.cardO-list .cardO-item {
+    list-style: none;
+    margin: 10px 0;
+    width: 320px!important;
+}
+
+.cardO-list .cardO-item:active {
+    cursor: grabbing;
+}
+
+.cardO-list .cardO-item .cardO-link:hover {
+    border-color: #5372F0;
+}
+
+.cardO-list .cardO-item .cardO-image {
+    width: 180px;
+    height: 180px;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    border-radius: 10px;
+    display: flex;
+    margin: auto;
+}
+
+.cardO-image img {
+    width: 200px;
+}
+
+.cardO-list .cardO-link .cardO-button {
+    height: 35px;
+    width: 35px;
+    color: #5372F0;
+    border-radius: 50%;
+    margin: 30 0 5px;
+    background: none;
+    cursor: pointer;
+    border: 2px solid #5372F0;
+    transform: rotate(-45deg);
+    transition: 0.4s ease;
+}
+
+.cardO-wrapper .swiper-pagination-bullet {
+    height: 13px;
+    width: 13px;
+    opacity: 0.5;
+    background: #5372F0;
+}
+
+.cardO-wrapper .swiper-pagination-bullet-active {
+    opacity: 1;
+}
+
+.cardO-wrapper .swiper-slide-button {
+    color: #5372F0;
+    margin-top: -35px;
+}
+
+@media screen and (max-width: 768px) {
+
+    .bodyCarouselOffer {
+        margin: 0;
+        padding: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: linear-gradient(#ECEFFE, #CED6FB);
+    }
+
+    .cardO-wrapper{
+        min-width: 150px;
+        margin: 10px!important;
+        overflow: hidden;
+        width: 95%!important;
+        background-color: #205C20;
+    }
+
+    .cardO-wrapper .swiper0-slide-button {
+        display: none!important;
+    }
+
+    .cardO-list .cardO-link .cardO-image {
+        width: 100%!important;
+        aspect-ratio: 8 / 9;
+        object-fit: cover;
+        border-radius: 10px;
+    }
+
+}
+

@@ -1,0 +1,42 @@
+.cardStar {
+    width: 100% !important;
+    margin: 1%;
+    padding: .5rem;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    border-radius: 0.5rem;
+    background-color: rgb(255, 255, 255);
+}
+
+.starV {
+    font-size: 1.1rem;
+    cursor: pointer;
+}
+
+.star {
+    font-size: 1.1rem;
+    cursor: pointer;
+}
+
+.one {
+    color: rgb(255, 0, 0);
+}
+
+.two {
+    color: rgb(255, 106, 0);
+}
+
+.three {
+    color: rgb(251, 255, 120);
+}
+
+.four {
+    color: rgb(255, 255, 0);
+}
+
+.five {
+    color: rgb(24, 159, 14);
+}
+
+.output {
+    font-size: 1rem;
+}

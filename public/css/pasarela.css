@@ -1,0 +1,432 @@
+@font-face {
+    font-family: 'Simply Rounded';
+    src: url('../fonts/Simply Rounded.ttf') format('truetype');
+    font-style: normal;
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: 'SFPRODISPLAYREGULA';
+    src: url('../fonts/SFPRODISPLAYREGULAR.OTF') format('truetype');
+    font-style: normal;
+    font-weight: normal;
+}
+
+:root {
+    --main-bg-color:  #4447eb;
+    --main-btn-color: #FC5E27;
+}
+
+.titulo {
+    font-family: 'Simply Rounded', sans-serif;
+}
+
+.texto {
+    font-family: 'SFPRODISPLAYREGULA', sans-serif;
+    font-weight: bold;
+}
+
+.c-a {
+    color: #4447eb;
+}
+
+.c-n {
+    color: #FC5E27;
+}
+
+p{
+    font-size: 1rem;
+}
+
+.boton {
+    background-color: #FC5E27;
+    width: 80px;
+    height: 45px;
+}
+
+.boton:hover {
+    background-color: #fa7b51;
+    width: 80px;
+    height: 45px;
+}
+
+.boton1 {
+    background-color: #4447eb;
+    width: 80%;
+    height: 45px;
+    border-radius: 25px;
+    color: white;
+    font-weight: bold;
+}
+
+.boton1:hover {
+    background-color: #585be7;
+    width: 80%;
+    height: 45px;
+    border-radius: 25px;
+    color: white;
+    font-weight: bold;
+}
+
+.boton1:active {
+    background-color: #fa7b51!important;
+    
+    color: white!important;
+}
+
+.banner {
+    text-align: center;
+    padding: 15px;
+}
+
+.img_logo {
+    margin:auto;
+    width: 35%;
+}
+
+#principal {
+    margin-left: 5px!important;
+    margin-right: 5px;
+    height: 80vh!important;
+    background-color: white;;
+}
+
+#divPrincipal {
+    margin-left: 5px!important;
+    margin-right: 5px;
+    min-height: 80vh!important;
+}
+
+.pantalla {
+    height: auto;
+    background-color: #7a7c80;
+}
+
+.bloque {
+    height: 100%;
+}
+
+.bloqueP {
+    position: relative;
+    height: 100%;
+}
+.banner{
+    background-color: var(--main-bg-color);
+}
+.modalFondo{
+    background-color: var(--main-bg-color);
+}
+.card {
+    height: auto!important;
+    border-radius: 25px!important;
+}
+.modal-header{
+    background-color: var(--main-bg-color)!important;
+}
+
+.button1 {
+    width: 80%;
+    height: 50%;
+    background-color: #a7e7eb;
+    margin: 20px;
+    border-color: black;
+    border-radius: 15px;
+    font-family: 'Baloo 2', cursive;
+    font-size: 100%;
+}
+
+.rowDato {
+    width: 100%;
+    height: 45px;
+    background-color: #96b7f5;
+    color: rgb(84, 40, 110);
+    text-align: center;
+    font-weight: bold;
+    padding: 2px;
+    margin-bottom: 10px;
+}
+
+.imgcopy {
+    float: right;
+    margin-right: 15px;
+    position: relative;
+ 
+}
+
+.buttonR {
+    width: 80%;
+    height: 100%;
+    margin: 5px;
+    background-color: #abadb1;
+    border-color: black;
+    border-radius: 15px;
+    font-family: 'Baloo 2', cursive;
+    font-size: 100%;
+}
+
+.buttonR:hover {
+    background-color: #7a7c80;
+}
+
+.buttonM {
+    height: 45px;
+    margin: 1px;
+    background-color: #abadb1;
+    border-color: black;
+    border-radius: 1px;
+    font-family: 'Baloo 2', cursive;
+    font-size: 100%;
+}
+
+.buttonM:hover {
+    background-color: #7a7c80;
+}
+
+.imageSelected{
+    width: 80px;
+    height: 150px;
+    border: 1px solid #000;
+    border-radius: 10px;
+}
+
+.img {
+    width: 200px!important;
+    
+}
+
+.imgBanco img{
+    width: 220px!important;
+}
+
+.enlaceNuevo{
+    cursor: pointer;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.enlaceEliminar{
+    cursor: pointer;
+    text-decoration: none;
+    color: red;
+    font-weight: bold;
+}
+
+.inputForm{
+    width: 100%!important;
+    height: 45px!important;
+    border-radius: 25px;    
+    border: 2px solid #858585!important;
+    font-weight: bold;
+}
+.inputForm:hover{
+    border: 3px solid #4447eb !important;
+}
+
+.inputType {
+    width: 100px!important;
+    font-weight: bold;
+}
+
+input:focus, select:focus, select, input.form-control:focus {
+
+    outline:none !important;
+
+    outline-width: 0 !important;
+
+    box-shadow: none;
+
+    -moz-box-shadow: none;
+
+    -webkit-box-shadow: none;
+
+}
+
+.noradiance:focus {
+
+    outline:none !important;
+
+    outline-width: 0 !important;
+
+    box-shadow: none;
+
+    -moz-box-shadow: none;
+
+    -webkit-box-shadow: none;
+
+}
+
+
+@media (max-width: 768px) {
+    .footer-img{
+        width: 25%!important;
+    }
+
+    .footer-img{
+        width: 45%!important;
+    }
+
+    .footer{
+        height: 25vh;
+    }
+}
+
+@media (min-width: 992px) {
+   
+}
+
+@media (max-width: 590px) {
+
+    label{
+        display: none;
+    }
+    .form-group{
+        margin-bottom: 15px;
+    }
+    .textoreg{
+        font-size: .8rem;
+        font-weight: bold;
+    }
+
+    .img_logo {
+        margin:auto;
+        width: 80%;
+    }
+
+    .inputType {
+        width: 100%!important;
+    }
+
+    .footer-img{
+        width: 25%!important;
+    }
+
+    .footer-img{
+        width: 45%!important;
+    }
+
+    .footer{
+        height: 25vh;
+    }
+}
+    
+@media (max-width: 590px) {
+    label{
+        display: none;
+    }
+    .form-group{
+        margin-bottom: 15px;
+    }
+    .textoreg{
+        font-size: .8rem;
+        font-weight: bold;
+    }
+
+    .img_logo {
+        margin:auto;
+        width: 80%;
+    }
+
+    .inputType {
+        width: 100%!important;
+    }
+    
+    .footer-img{
+        width: 25%!important;
+    }
+
+    .footer-img{
+        width: 45%!important;
+    }
+
+    .footer{
+        height: 25vh;
+    }
+
+}
+
+
+.montoPagar {
+    background-color: #E7D8FA;
+    border-radius: 5px;
+    text-align: center;
+    padding: 10px;
+    font-weight: bold;
+    color: var(--main-bg-color);
+}
+
+.divInfo {
+    background-color: #E7D8FA;
+    border-radius: 5px;
+    text-align: center;
+    padding: 10px;
+    color: #000;
+}
+
+.negrita1 {
+    font-weight: bold;
+}
+
+.textInfo {
+    color: #000;
+    text-align: justify;
+}
+
+.negrita {
+    font-weight: bold;
+}
+
+.footerP {
+    background-color: black;    
+    bottom: 0;
+    width: 100%;
+    height: 40px;
+    color: white;
+}
+
+.bottopP {
+    position: absolute;
+    bottom: 0;
+    width: 90%;
+    height: auto;
+    text-align: justify;
+    margin-bottom: 10px;
+}
+
+
+/* Ajuste al input radio*/
+/*Hide the input buttons using CSS:*/
+    .cuentabancaria{
+        display:none;
+    }
+
+    .labelcuentabancaria{
+        width: 100%;
+        color: white;
+    }
+
+    .cuentabancaria + .labelcuentabancaria:hover{
+        /*box-shadow: 0 1px #7a7a7a;
+        top: 1px;*/
+        background-color: white;
+        color: white;
+    }
+    
+    .cuentabancaria:checked + .labelcuentabancaria{
+        /*box-shadow: 0 0 #7a7a7a;
+        top: 2px;*/
+        background-color: var(--main-btn-color);
+    }
+
+    .cuentabancaria:not(:checked) + .labelcuentabancaria{
+        /*box-shadow: 0 0 #7a7a7a;
+        top: 2px;*/
+        color: #000;
+        background-color:#cfcfcf;
+    }
+
+    .verifica {
+        display: block;
+    }
+
+    .optionModoPago { color: #000; background-color:white; }
+    .optionModoPago:hover { color: #000; background-color:white; }

@@ -1,0 +1,40 @@
+/* Importing Google fonts - Inter */
+@import url('https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,100..900&display=swap');
+
+:root {
+    --main-bg-color:  #4447eb;
+    --main-btn-color: #FC5E27;
+    --main-footer-color: #FFCC2A;
+}
+
+.card.showProductCard {
+    background-color: #ffffff !important;
+    width: 18rem !important;
+    height: 23rem !important;
+    border-radius: 15px;
+    /* box-shadow: 0 3px 3px rgba(0, 0, 0, 0.4); */
+    box-shadow: 0 3px 3px val(--main-btn-color);
+    flex: auto;
+  }
+  
+  .showProductCard:hover {
+    box-shadow: 0 3px 3px var(--main-bg-color);
+    box-shadow: 0 3px 3px #FC5E27;
+  }
+  
+  .showProductCard img{
+    width: 100% !important;
+    height: 150px!important;
+    text-align: center!important;
+    align-items: center;
+  }
+
+
+@media screen and (max-width: 768px) {
+
+
+
+}
+
+
+
