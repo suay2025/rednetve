@@ -1,123 +1,219 @@
-<div>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-    <meta charset="utf-8">
-    <title>WifiExprés</title>
-    <meta name="description" content="Compra y vende Pan de Jamón y Combos Navideños Caracas">
-    <meta name="keywords" content="vende, compra, Pan, Jamón, Pan de Jamón, Combos Navideños, Caracas, directo a tu mesa, @panexpres.vezla, Panexprés, Panexpres">
-    <link rel="shortcut icon" type="x-icon" href="/img/logo_repuestos.png" />
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="/css/style-welcome.css">
-    <link rel="stylesheet" href="/css/navigationMap.css">
-    <!-- <link rel="stylesheet" href="/css/style.css"> -->
-    <!-- <link rel="stylesheet" href="/css/bootstrap.min.css"> -->
-    <!-- <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script> -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    
-    <script src="/js/jquery-3.6.4.min.js"></script>  
-    <script src="/js/qrcode.min.js"></script>
-    <script src="/js/qr.js"></script>
-    <!-- <script src="/js/slick.min.js"></script>
-    <link rel="stylesheet" href="/css/slick-theme.min.css">
-    <link rel="stylesheet" href="/css/slick.min.css"> -->
-    <link rel="stylesheet" href="/css/carouselOffer.css">
-    <link rel="stylesheet" href="/css/showProducts.css">
-    <link rel="stylesheet" href="/css/star.css">
-    @stack('styles')
-    <livewire:styles />
-</head>    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rednet - Diseño Responsive</title>
+    <!-- Enlace a Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Enlace a Font Awesome para iconos (necesario para el chat y redes sociales) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <!-- Enlace a CSS Personalizado -->
+    <link rel="stylesheet" href="css/styles_welcome.css">
+</head>
 <body>
-    <div class="row">
-        <div class="col-lg-12 col-xl-12 col-md-12 col-sm-12 col-12">
-            <div class="wrapper">
-                @if($in_cellphonecontact > 0)            
-                    <div class="row" id="whatsapp" style="position: fixed; bottom: 20px; right:20px; z-index: 20;">
-                        <a href="https://api.whatsapp.com/send?phone=+58{{$comercio->contactcellphone}}&text={{ $comercio->msgcontact}}" target="_blank">
-                            <svg aria-hidden="true" focusable="false" data-prefix="fab" data-icon="whatsapp" class="svg-inline--fa fa-whatsapp fa-w-14 text-success" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"></path></svg>
-                        </a>
-                    </div>            
-                @endif
-                @livewire('layouts.navbar-nuevo', [
-                        'comercioId' => 1,
-                        'manufacturer_id' => $manufacturer_id,
-                        'modelo_id' => $modelo_id,
-                        'motor_id' => $motor_id,
-                        ])
-                @if($words == '' || $words == null)   
-                    @if($in_sliderprincipal > 0)
-                        @livewire('components.promociones')
-                    @endif
-                @endif
 
-                @if($in_marcasproductos > 0)
-                    @livewire('components.marcas-productos')
-                @endif
-                <div class="my-2"></div>    
-                <section class="container-fluid">
-                    <div class="my-2"></div>                    
-                </section>
-                <div class="container-fluid mx-3">
-                    <div class="row">
-                        <div class="col-md-10 col-12">
-                            <img style="width:100%; height:100%;" src="/img/banner_principal_wifiexpres.png" alt="">
-                        </div>
-                        <div class="col-md-2 col-12">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <h4>QR WifiExpres</h4>
-                                </div>
-                            </div>                            
-                            <div class="row d-none">
-                                <input type="text" id="textInput" placeholder="Enter text here" value="WIFI:S:wifiexpres;P:nopass;">
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12 col-12">
-                                    <div id="qrcode"></div>        
-                                </div>
-                            </div>                        
-                        </div>     
-                        <br><br>
-                        @push('js')
-                        <script src="/js/qr.js"></script>
-                        <script>
-                            generateQr('qrcode', 'WIFI:S:wifiexpres;P:nopass;')
-                        </script>
-                        @endpush('js')
-                    </div>
+    <!-- 1. BARRA DE NAVEGACIÓN (NAVBAR) -->
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top py-3">
+            <div class="container-fluid px-md-5">
+                <!-- Logo Izquierda -->
+                    <a class="navbar-brand" href="#inicio" data-page="inicio">
+                    <!-- LOGO FICTICIO: Usa un placeholder si no tienes la imagen -->
+                    <!-- CAMBIO: Se eliminó height="30" para que el tamaño lo maneje styles.css. El placeholder ahora es 45px. -->
+                    <img src="img/logo_rednet.png" class="img-responsive" onerror="this.onerror=null; this.src='https://placehold.co/120x45/007bff/white?text=Rednet';" alt="Logo Rednet">
+                </a>
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <!-- Menú Central -->
+                    <ul class="navbar-nav mx-auto">
+                        <li class="nav-item">
+                            <!-- Inicialmente activo -->
+                            <a class="nav-link active" aria-current="page" href="#inicio" data-page="inicio">Inicio</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#quienes-somos" data-page="nosotros">Nosotros</a>
+                        </li>
+                        
+                        <li class="nav-item">
+                            <a class="nav-link" href="#nuestros-servicios" data-page="servicios">Servicios</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#planes" data-page="planes">Planes</a>
+                        </li>
+                    </ul>
+
+                    <!-- Opciones Derecha -->
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="miRednetDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" data-page="mi-rednet">
+                                <img src="img/icono_mirednet.svg" alt="" class="nav-icon" onerror="this.onerror=null;this.src='https://placehold.co/20x20/007bff/fff?text=R';">
+                                Mi Rednet
+                                <!-- Inline SVG caret (stroke-only, transparent background) -->
+                                <svg class="dropdown-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                                    <path d="M6 9l6 6 6-6"></path>
+                                </svg>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="miRednetDropdown">
+                                <li><a class="dropdown-item" href="#">Login</a></li>
+                                <li><a class="dropdown-item" href="#">Salir</a></li>
+                            </ul>
+                        </li>
+                        <!-- Localidad removed as requested -->
+                    </ul>
                 </div>
             </div>
+        </nav>
+    </header>
+
+    <!-- 2. CONTENIDO PRINCIPAL (MAIN) -->
+    <main class="mt-5 pt-5">
+        
+        <!-- Sección 1: INICIO (Con imagen de Bienvenida) -->
+        <section id="inicio" class="vh-70 w-100 position-relative bg-section-1">
+            <img src="img/banner_empresa.jpg" onerror="this.onerror=null;" alt="Imagen de Bienvenida" class="img-fluid section-img">
+        </section>
+
+        <!-- Sección 2: sQUIÉNES SOMOS (Color de fondo intercalado) -->
+        <section id="quienes-somos" class="vh-70 w-100 d-flex justify-content-center align-items-center text-center p-0 bg-section-2">
+            <img src="img/Nosotros.jpg" onerror="this.onerror=null;" alt="Mapa de Cobertura" class="img-fluid section-img section-img--contain">
+        </section>
+        
+        <!-- Sección 3: COBERTURA (Con imagen, Color de fondo intercalado) -->
+        <section id="cobertura" class="vh-70 w-100 position-relative bg-section-1">
+            <img src="img/cobertura_empresa.jpg" onerror="this.onerror=null;" alt="Mapa de Cobertura" class="img-fluid section-img">
+        </section>
+
+        <!-- Sección 4: DISFRUTA SIN LÍMITES (Color de fondo intercalado) -->
+        <section id="disfruta" class="vh-70 w-100 position-relative bg-section-1">
+            <img src="img/disfruta.jpg" onerror="this.onerror=null;" alt="Mapa de Cobertura" class="img-fluid section-img">
+        </section>
+
+        <!-- Sección 5: NUESTROS SERVICIOS (ID usado por el enlace "Servicios") -->
+        <section id="nuestros-servicios" class="vh-70 w-100 position-relative bg-section-1">
+            <img src="img/SERVICIO.jpg" onerror="this.onerror=null;" alt="Mapa de Cobertura" class="img-fluid section-img">
+        </section>
+
+        <!-- Sección 6: PLANES (Sección principal para ver planes) -->
+        <section id="planes" class="vh-70 w-100 position-relative bg-section-1">
+            <img src="img/PLANES.jpg" onerror="this.onerror=null;" alt="Mapa de Cobertura" class="img-fluid section-img">
+            </section>
+
+            <!-- Sección 7: PLANES (Duplicado sin imagen con columnas y botones) -->
+            <section id="planes-duplicado" class="w-100 bg-section-2 py-5 d-none">
+                <div class="container text-dark">
+                    <!-- Primera fila: dos columnas (col-md-3 y col-md-9) -->
+                    <div class="row mb-4">
+                        <div class="col-12 col-md-3 mb-3 mb-md-0 d-flex flex-column align-items-stretch">
+                            <button class="btn btn-outline-primary mb-2 w-100 plan-btn">
+                                <span class="btn-title">MEGA DEDICADOS</span>
+                                <small class="btn-subtitle d-block text-muted">COMERCIO MEDIO</small>
+                            </button>
+                            <button class="btn btn-outline-primary mb-2 w-100 plan-btn">
+                                <span class="btn-title">COMERCIO</span>
+                                <small class="btn-subtitle d-block text-muted">PLUS</small>
+                            </button>
+                            <button class="btn btn-outline-primary w-100 plan-btn">
+                                <span class="btn-title">PROVEEDORES</span>
+                                <small class="btn-subtitle d-block text-muted">SERVICIO DE INTERNET (ISP)</small>
+                            </button>
+                        </div>
+                        <div class="col-12 col-md-9">
+                            <p class="mb-0">Aquí puedes describir brevemente las características generales de los planes seleccionados o mostrar contenido dinámico relacionado con el plan escogido.</p>
+                        </div>
+                    </div>
+
+                    <!-- Segunda fila: título y botón solicitar reunión -->
+                    <div class="row align-items-center">
+                        <div class="col-12 col-md-6">
+                            <h3 class="mb-0">Planes corporativos</h3>
+                        </div>
+                        <div class="col-12 col-md-6 text-md-end mt-3 mt-md-0">
+                            <div class="dropdown d-inline-block">
+                                <button class="btn btn-primary dropdown-toggle" type="button" id="solicitarReunionDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Solicitar una reunión
+                                </button>
+                                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="solicitarReunionDropdown">
+                                    <li><a class="dropdown-item" href="#">Juan Pérez</a></li>
+                                    <li><a class="dropdown-item" href="#">María Gómez</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </section>
+
+
+    </main>
+
+    <!-- 3. PIE DE PÁGINA (FOOTER) -->
+    <footer class="bg-dark text-white pt-5">
+        <div class="container">
+            <div class="row text-center text-md-start">
+                
+                <!-- Columna 1: Logo -->
+                <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
+                    <img src="img/logo_rednet_WHITE.png" class="img-responsive footer-logo" onerror="this.onerror=null; this.src='https://placehold.co/120x30/ffffff/000?text=Rednet';" alt="Logo Rednet Footer">
+                    <p class="mt-3 text-white-50">Conectando tu mundo con la mejor velocidad.</p>
+                </div>
+                
+                <!-- Columna 2: Dirección -->
+                <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mt-3">
+                    <h5 class="text-uppercase mb-4 font-weight-bold text-warning">Dirección</h5>
+                    <p><i class="fas fa-home me-2"></i> Av. Principal, Edificio Rednet, Caracas.</p>
+                </div>
+
+                <!-- Columna 3: Horario de Atención -->
+                <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mt-3">
+                    <h5 class="text-uppercase mb-4 font-weight-bold text-warning">Horario</h5>
+                    <p><i class="fas fa-clock me-2"></i> Lunes a Viernes: 8:00am - 5:00pm</p>
+                    <p><i class="fas fa-clock me-2"></i> Sábados: 9:00am - 1:00pm</p>
+                </div>
+
+                <!-- Columna 4: Menús y Correo -->
+                <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
+                    <h5 class="text-uppercase mb-4 font-weight-bold text-warning">Enlaces Útiles</h5>
+                    <p><a href="#inicio" class="text-white text-decoration-none">Inicio</a></p>
+                    <p><a href="#quienes-somos" class="text-white text-decoration-none">Empresa</a></p>
+                    <p><a href="mailto:contacto@rednet.com" class="text-white text-decoration-none"><i class="fas fa-envelope me-2"></i> contacto@rednet.com</a></p>
+                </div>
+            </div>
+            
+            <!-- NUEVA FILA: Derechos Reservados y Redes Sociales -->
+            <hr class="mt-4 mb-3 bg-secondary">
+            <div class="row pb-3 align-items-center">
+                
+                <!-- 1ra Columna: Derechos Reservados -->
+                <div class="col-md-6 text-center text-md-start">
+                    <p class="text-white-50 mb-0">Todos los derechos reservados | Rednet 2025</p>
+                </div>
+
+                <!-- 2da Columna: Redes Sociales -->
+                <div class="col-md-6 text-center text-md-end mt-3 mt-md-0">
+                    <a href="#" class="text-white-50 mx-2"><i class="fab fa-instagram fa-lg"></i></a>
+                    <a href="#" class="text-white-50 mx-2"><i class="fab fa-whatsapp fa-lg"></i></a>
+                    <a href="#" class="text-white-50 mx-2"><i class="fab fa-tiktok fa-lg"></i></a>
+                    <a href="#" class="text-white-50 mx-2"><i class="fab fa-facebook-f fa-lg"></i></a>
+                    <a href="#" class="text-white-50 mx-2"><i class="fab fa-linkedin-in fa-lg"></i></a>
+                </div>
+            </div>
+
         </div>
-    </div>
-    
-    @livewire('layouts.footer', [
-                'comercioId' => 1,
-                ])
+    </footer>
 
+    <!-- BOTÓN DE CHAT FLOTANTE (Posición Fija Abajo Derecha) -->
+    <a href="#" class="chat-btn bg-success shadow-lg" role="button" aria-label="Abrir chat de soporte">
+        <i class="fas fa-comment-dots text-white"></i>
+    </a>
+
+    <!-- Enlace a Bootstrap JS (Popper y jQuery incluidos en el bundle) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Enlace a JavaScript Personalizado -->
+    <script src="js/scripts_welcome.js"></script>
 </body>
-    
 </html>
-</div>
-
-<script src="/js/app.js"></script>
-<script src="/js/backend.js"></script>
-<script src="/js/bootstrap.min.js"></script>
-<script src="/js/bootstrap.bundle.min.js"></script>
-<script src="/js/jquery-3.6.4.min.js"></script>
-
-@stack('js')
-@stack('before-livewire-scripts')
-<livewire:scripts />
-@stack('after-livewire-scripts')
-
-@stack('alpine-plugins')
-<!-- Alpine Core -->
-<script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
-
-<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" /> -->
-
-
-
