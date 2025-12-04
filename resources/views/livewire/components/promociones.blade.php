@@ -66,7 +66,6 @@
         }
     </style>
     <div class=""></div>
-    @if($promociones)
     <div class="row">
         <div class="col-md-7 col-sm-7">
             <div class="cuadro1Promocion" style="">
@@ -111,5 +110,4 @@
             
         </div>
     </div>
-    @endif
 </div>

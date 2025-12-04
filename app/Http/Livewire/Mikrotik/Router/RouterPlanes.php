@@ -22,32 +22,9 @@ class RouterPlanes extends Component
 
     public $addressPool = [];
 
-    public $profileIdBeingRemoved = null;
-
     public function mount($router_id)
     {        
         $this->router = Router::find($router_id);
-    }
-
-    public function configRouter()
-    {
-        if(config('app.host') == 'ip'){
-            $host = $this->router->ip;
-        }else{
-            $host = $this->router->dns;
-            //$host = 'typej.ddns.net';
-            //$host = '192.168.1.6';
-        }        
-        
-        // Iniciar la conexión
-        $client = new Client([
-            'host' => $host,
-            'user' => $this->router->admin,
-            'pass' => $this->router->password,
-            'port' => 8728,
-        ]);
-
-        return $client;
     }
 
     public function exeQuery($datos, $query)
@@ -111,9 +88,9 @@ class RouterPlanes extends Component
 		$this->showEditModal = false;
 
         $this->state['sharedUsers'] =  1;
-        $this->state['sessionTimeout'] =  '00:10:00';
-        $this->state['idleTimeout'] =  '00:00:10';
-        $this->state['keepaliveTimeout'] =  '00:01:00';
+        $this->state['sessionTimeout'] =  '00:01:00';
+        $this->state['idleTimeout'] =  '01:00:00';
+        $this->state['keepaliveTimeout'] =  '00:02:00';
         $this->state['statusAutorefresh'] =  '00:00:10';
         $this->state['rateLimitRxTx'] =  '1M/1M';
         $this->state['addressPool'] =  'none';
@@ -144,7 +121,23 @@ class RouterPlanes extends Component
 
                 ], $messages)->validate();
 
-                $client = $this->configRouter();
+                if(config('app.host') == 'ip'){
+                    $host = $this->router->ip;
+                }else{
+                    $host = $this->router->dns;
+                    //$host = 'typej.ddns.net';
+                    //$host = '192.168.1.6';
+                }        
+                
+                // Iniciar la conexión
+                $datos = [
+                    'host' => $host,
+                    'user' => $this->router->admin,
+                    'pass' => $this->router->password,
+                    'port' => 8728,
+                ];
+
+                $client = new Client($datos);
                 
                 // 3. Construir la consulta de la API para crear el perfil
                 $query = (new Query('/ip/hotspot/user/profile/add'))
@@ -170,81 +163,30 @@ class RouterPlanes extends Component
 		//$validatedData['password'] = bcrypt($validatedData['password']);
     }
 
-    public function edit($name)
-	{
-		$router = $this->router;
-        $namesProfilesUser = $this->namesProfilesUser;
-        $addressPool = $this->addressPool;        
-		$this->reset();
-        $this->router = $router;
-        $this->namesProfilesUser = $namesProfilesUser;
-        $this->addressPool = $addressPool;
-
-		$this->showEditModal = true;
-
-        $client = $this->configRouter();
-        
-        // buscar id
-        $query = (new Query('/ip/hotspot/user/profile/print'))
-            ->where('name', $name);
-        $plan = $client->query($query)->read();
-
-        if(isset($plan[0]['session-timeout']))
-        {
-            $session = $plan[0]['session-timeout'];
-        }else{
-            $session = '';
-        }
-        if(isset($plan[0]['rate-limit']))
-        {
-            $uploadRate = explode('/', $plan[0]['rate-limit'])[0];
-            $downloadRate = explode('/', $plan[0]['rate-limit'])[1];
-        }else{
-            $uploadRate = '';
-            $downloadRate = '';
-        }
-        if(count(explode('/', $plan[0]['name'])) > 1) {
-            $costo = explode('/', $plan[0]['name'])[1];
-        }else{
-            $costo = 0;
-        }
-
-        $this->state['id'] = $plan[0]['.id'];
-        $this->state['name'] = $plan[0]['name'];
-        $this->state['sessionTimeout'] = $session;
-        $this->state['idleTimeout'] = $plan[0]['idle-timeout'];
-        $this->state['keepaliveTimeout'] = $plan[0]['keepalive-timeout'];
-        $this->state['statusAutorefresh'] = $plan[0]['status-autorefresh'];
-        $this->state['sharedUsers'] = $plan[0]['shared-users'];
-        $this->state['addMacCookie'] = $plan[0]['add-mac-cookie'];
-        $this->state['macCookieTimeout'] = $plan[0]['mac-cookie-timeout'];
-        $this->state['uploadRate'] = $uploadRate;
-        $this->state['downloadRate'] = $downloadRate;
-        $this->state['costo'] = $costo;
-
-        $this->dispatchBrowserEvent('show-formProfileUser', ['addressPool' => $this->addressPool]);
-	}
-
-    public function confirmProfileRemoval($id)
-	{
-		$this->profileIdBeingRemoved = $id;
-
-		$this->dispatchBrowserEvent('show-delete-modal');
-	}
-
-    public function deleteProfile()
+    public function deleteProfile($nameProfile)
     {
         try {
+            if(config('app.host') == 'ip'){
+                $host = $this->router->ip;
+            }else{
+                $host = $this->router->dns;
+                //$host = 'typej.ddns.net';
+                $host = '192.168.1.6';
+            }        
             
-            $client = $this->configRouter();
-
+            // Iniciar la conexión
+            $datos = [
+                'host' => $host,
+                'user' => $this->router->admin,
+                'pass' => $this->router->password,
+                'port' => 8728,
+            ];
+            
+            $client = new Client($datos);
             $query = (new Query('/ip/hotspot/user/profile/remove'))
-            ->equal('.id', $this->profileIdBeingRemoved);
+            ->equal('.id', $nameProfile);
             
             $delete = $client->query($query)->read();
-
-            $this->dispatchBrowserEvent('hide-delete-modal');
-
             return true;
                 
         } catch (\Exception $e) {
@@ -255,47 +197,37 @@ class RouterPlanes extends Component
 
     public function render()
     {
-        try {
-            
-                
-            //todos los perfiles usuarios de los hotspot
+        //todos los perfiles usuarios de los hotspot
 
-            if(config('app.host') == 'ip'){
-                $host = $this->router->ip;
-            }else{
-                $host = $this->router->dns;
-                //$host = 'typej.ddns.net';
-                //$host = '192.168.1.6';
-            }        
-            
-            // Iniciar la conexión
-            $datos = [
-                'host' => $host,
-                'user' => $this->router->admin,
-                'pass' => $this->router->password,
-                'port' => 8728,
-            ];
+        if(config('app.host') == 'ip'){
+            $host = $this->router->ip;
+        }else{
+            $host = $this->router->dns;
+            //$host = 'typej.ddns.net';
+            //$host = '192.168.1.6';
+        }        
+        
+        // Iniciar la conexión
+        $datos = [
+            'host' => $host,
+            'user' => $this->router->admin,
+            'pass' => $this->router->password,
+            'port' => 8728,
+        ];
 
-            $profilesUser = $this->exeQuery($datos, '/ip/hotspot/user/profile/print');
-            $this->namesProfilesUser = [];
-            foreach ($profilesUser as $elemento) {
-                $this->namesProfilesUser[] = $elemento['name'];
-            }
-
-            //todos los perfiles usuarios de los hotspot
-            $address = $this->exeQuery($datos, '/ip/pool/print');
-            $this->addressPool = [];
-            foreach ($address as $elemento) {
-                $this->addressPool[] = $elemento['name'];
-            }
-
-            return view('livewire.mikrotik.router.router-planes', ['profilesUser' => $profilesUser]);
-
-        } catch (Exception $e) {
-            return view('livewire.error.show-error', [
-                'error' => '501',
-                'description' => $e,
-            ]);
+        $profilesUser = $this->exeQuery($datos, '/ip/hotspot/user/profile/print');
+        $this->namesProfilesUser = [];
+        foreach ($profilesUser as $elemento) {
+            $this->namesProfilesUser[] = $elemento['name'];
         }
+
+        //todos los perfiles usuarios de los hotspot
+        $address = $this->exeQuery($datos, '/ip/pool/print');
+        $this->addressPool = [];
+        foreach ($address as $elemento) {
+            $this->addressPool[] = $elemento['name'];
+        }
+
+        return view('livewire.mikrotik.router.router-planes', ['profilesUser' => $profilesUser]);
     }
 }

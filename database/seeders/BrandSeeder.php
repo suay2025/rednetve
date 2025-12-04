@@ -21,7 +21,12 @@ class BrandSeeder extends Seeder
             'updated_at' => '2022-05-16 12:20:36'
         ]);
 
-        
+        DB::table('brands')->insert([
+            'name' => 'MARCA 2',
+            'comercio_id' => '2',
+            'created_at' => '2022-05-16 12:20:36',
+            'updated_at' => '2022-05-16 12:20:36'
+        ]);
 
     }
 }

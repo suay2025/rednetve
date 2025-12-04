@@ -20,7 +20,7 @@ class Administrator
         if (auth()->check() && (auth()->user()->isAdmin() 
             || auth()->user()->isUser()
             || auth()->user()->isCliente()
-            || auth()->user()->isAliado()
+            || auth()->user()->isAfil()
             || auth()->user()->isDelivery())) 
         {
             return $next($request);

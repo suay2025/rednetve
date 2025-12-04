@@ -17,16 +17,10 @@ class CreateTicketUsersTable extends Migration
             $table->id();
             $table->string('nroTicket');
             $table->bigInteger('user_id');
-            $table->bigInteger('userMikrotik_id');
-            $table->string('server');
             $table->string('user');
-            $table->string('password');
             $table->string('profile');
-            $table->string('prefijo');
             $table->string('monto');
             $table->string('nrorouter');
-            $table->string('status')->default('noactivo');
-            $table->date('fechaVenta')->nullable();
             $table->timestamps();
         });
     }

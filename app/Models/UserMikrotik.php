@@ -10,7 +10,6 @@ class UserMikrotik extends Model
     use HasFactory;
     //actualizar
     protected $fillable = [
-        'user_id',
         'mikrotik_id',
         'server',
         'name',
@@ -31,20 +30,5 @@ class UserMikrotik extends Model
         'packetsOut',
         'active',
     ];
-
-    /* ultima entrada*/
-    
-    public function tickets(): HasMany
-    {
-        return $this->hasMany(TicketUser::class, 'user_id', 'id')->latest();
-    }
-
-    /**
-     * Relación para obtener solo el último ticket del usuario (Usando latestOfMany).
-     */
-    public function latestTicket(){
-        
-        return $this->hasOne(TicketUser::class, 'user_id', 'id')->latestOfMany();
-    }
 
 }

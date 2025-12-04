@@ -51,20 +51,20 @@
                                             </a>
                                         </td>
                                         <td class="text-success">{{ $user['uptime'] }}</td>
-                                        <td>{{ (isset($user['server']))? $user['server'] : 'all' }}</td>
+                                        <td>{{ (isset($user['server']))? $user['server'] : '' }}</td>
                                         <td>{{ (isset($user['profile']))? $user['profile'] : '' }}</td>
-                                        <td>{{ (isset($user['profile']))? $this->timeProfileUser($user['profile']) : '' }} </td>
+                                        <td>{{ $this->timeProfileUser($user['profile'])}} </td>
                                         <td class="text-warning">{{ $this->limitUptimeUser($user['name'])}} </td>
                                         <td>{{ $user['disabled'] }}</td>
                                         <td>
-                                            <a href="" wire:click.prevent="edit('{{ $user['.id'] }}', '{{ $user['name'] }}', '{{ (isset($user['profile']))? $user['profile'] : '' }}')">
+                                            <a href="" wire:click.prevent="edit('{{ $user['.id'] }}', '{{ $user['name'] }}', '{{ $user['profile'] }}')">
                                                 <i class="fa fa-edit mr-2"></i>
                                             </a>
 
                                             <a href="" wire:click.prevent="confirmUserRemoval('{{ $user['.id'] }}')">
                                                 <i class="fa fa-trash text-danger mr-2"></i>
                                             </a>
-                                            <a href="" wire:click.prevent="defineUptimeLimit('{{ $user['.id'] }}', '{{ (isset($user['profile']))? $user['profile'] : '' }}')">
+                                            <a href="" wire:click.prevent="defineUptimeLimit('{{ $user['.id'] }}', '{{ $user['profile'] }}')">
                                                 <i class="fa fa-solid fa-broom mr-2 text-warning"></i>
                                             </a>
                                             <a href="" wire:click.prevent="cleanUptime('{{ $user['.id'] }}')">

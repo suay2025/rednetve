@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>WifiExpres</title>
+  <title>{{ setting('site_title') }} | {{ setting('site_name') }}</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -22,7 +22,7 @@
         <div class="card-body">
             <div class="row">
                 <div class="col-lg-12 titulo c-a text-center">
-                    <a href="/"><img class="logo-login-register mx-auto " src="/img/wifiexpres_banner-compressed.jpg" alt=""></a>
+                    <a href="/"><img class="logo-login-register mx-auto " src="/img/panexpres_banner.png" alt=""></a>
                 </div>
             </div>
             <div class="row">
@@ -33,25 +33,29 @@
     
             <form action="{{ route('autenticar') }}" method="POST">
                 @csrf
-                <div class="form-group my-2">
-                    <div class="row mx-auto" >
-                        <div class="col-xs-12 col-sm-12 col-md-12">
-                            <label for="user">Usuario</label>
-                            <input type="text" name="user" class="form-control inputForm" placeholder="Correo Electrónico" id="userW">
+                <div class="form-group">
+                    <div class="row mx-auto">
+                        <div class="col-xs-6 col-md-4 col-sm-4 col-4">
+                            <label for="identificationNac">Tipo </label>
+                            <select class="form-control @error('identificationNac') is-invalid @enderror" name="identificationNac" id="identificationNac" placeholder="Tipo">
+                                <option value="J">J-</option>
+                                <option value="E">E-</option>
+                                <option value="G">G-</option>
+                                <option value="P">P-</option>
+                                <option value="V" selected>V-</option>
+                            </select>
                         </div>
-                    </div>
-                    @error('user')
-                    <span class="text-danger">{{ $message }}</span>
-                    @enderror
-                </div>
-
-                <div class="form-group my-2">
-                    <div class="row mx-auto" >
-                        <div class="col-xs-12 col-sm-12 col-md-12">
-                            <p>o</p>
+                        <div class="col-xs-6 col-md-8 col=sm-8 col-8">
+                            <label for="identificationNumber">Documento</label>
+                            <input type="text" class="form-control @error('identificationNumber') is-invalid @enderror" name="identificationNumber" id="identificationNumber" placeholder="Documento">
                         </div>
+                        @error('identificationNumber')
+                        <span class="text-danger">{{ $message }}</span>
+                        @enderror
                     </div>
+                    
                 </div>
+                        
                 <div class="form-group my-2">
                     <div class="row mx-auto" >
                         <div class="col-xs-12 col-sm-12 col-md-12">

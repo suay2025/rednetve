@@ -1,5 +1,5 @@
-<div class="d-flex justify-content-center align-items-center border bg-white pr-2 search">
-  <input {{ $attributes }} type="text" class="form-control border-0 " placeholder="Buscar">
+<div class="d-flex justify-content-center align-items-center border bg-white pr-2">
+  <input {{ $attributes }} type="text" class="form-control border-0" placeholder="Buscar">
   <div wire:loading.delay wire:target="searchTerm">
     <div class="la-ball-clip-rotate la-dark la-sm">
       <div></div>
@@ -14,9 +14,6 @@
  * Copyright 2015 Daniel Cardoso <@DanielCardoso>
  * Licensed under MIT
  */
-.search {
-    height: 15px !important;
-}
 .la-ball-clip-rotate,
 .la-ball-clip-rotate > div {
     position: relative;

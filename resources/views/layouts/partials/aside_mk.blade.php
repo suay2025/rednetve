@@ -1,7 +1,7 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4 overflowul">
   <!-- Brand Logo -->
   <a href="/" class="brand-link bg-white">
-    <img class="main-sidebar-img" src="/img/wifiexpres_logo.png" alt="">
+    <img class="main-sidebar-img" src="/img/panexpres_logo.png" alt="">
   </a>
   <!-- Sidebar -->
   <div class="sidebar">
@@ -41,6 +41,7 @@
             </p>
           </a>
         </li>
+
         @auth
           @if(auth()->user()->role == 'admin')
 
@@ -72,25 +73,9 @@
                 <a href="/usersMikrotik" class="nav-link {{ request()->is('usersMikrotik') ? 'active' : '' }}">
                 <i class="nav-icon fas fa-comments"></i>
                 <p>
-                    Usuarios Mikrotik
+                    Users Mikrotik
                 </p>
                 </a>
-            </li>
-
-            <li class="nav-item">
-                <a href="/listUsersAliados" class="nav-link {{ request()->is('listUsersAliados') ? 'active' : '' }}">
-                <i class="nav-icon fas fa-comments"></i>
-                <p>
-                    Usuarios Aliados
-                </p>
-                </a>
-            </li>
-
-            <li class="nav-item">
-              <a href="/listTicketsVendidos" class="nav-link {{ request()->is('listTicketsVendidos') ? 'active' : '' }}">
-                <i class="fa fa-solid fa-file-invoice-dollar"></i>
-                <p>Tickets Vendidos</p>
-              </a>
             </li>
 
             <!-- Hotspot -->
@@ -136,15 +121,6 @@
               </ul>
             </li>
             <!-- fin arbol -->
-
-            <li class="nav-item">
-              <a href="{{ route('admin.users') }}" class="nav-link {{ request()->is('admin/users') ? 'active' : '' }}">
-                <i class="nav-icon fas fa-users"></i>
-                <p>
-                  Usuarios
-                </p>
-              </a>
-            </li>
             
             <li class="nav-item">
               <a x-ref="profileLink" href="{{ route('admin.profile.edit') }}" class="nav-link {{ request()->is('admin/profile') ? 'active' : '' }}">
@@ -275,35 +251,10 @@
               </a>
             </li>
           @endif
+
+          
         @endauth
-        @auth
-          @if(auth()->user()->role == 'aliado')
-            <li class="nav-item">
-              <a href="/crearTicket" class="nav-link {{ request()->is('crearTicket') ? 'active' : '' }}">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Crear Ticket</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="/crearTicketPhone" class="nav-link {{ request()->is('crearTicketPhone') ? 'active' : '' }}">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Crear Ticket Phone</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="/listEventos" class="nav-link {{ request()->is('listEventos') ? 'active' : '' }}">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Evento</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="/listTicketsVendidos" class="nav-link {{ request()->is('listTicketsVendidos') ? 'active' : '' }}">
-                <i class="fa fa-solid fa-file-invoice-dollar"></i>
-                <p>Tickets Vendidos</p>
-              </a>
-            </li>
-          @endif
-        @endauth
+
         <!-- <li class="nav-item">
           <a href="{{ route('admin.messages') }}" class="nav-link {{ request()->is('admin/messages') ? 'active' : '' }}">
             <i class="nav-icon fas fa-comments"></i>

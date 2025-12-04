@@ -76,10 +76,11 @@ class ListPlanes extends Component
     public function exeQueryListPlanes($datos, $query)
     {
         try {
-             
-                // Iniciar la conexión
+
+                //$client = $this->configRouter();
+
                 $client = new Client($datos);
-                
+
                 $query = new Query($query);
 
                 $result = $client->query($query)->read();
@@ -94,8 +95,6 @@ class ListPlanes extends Component
     {
         try {
 
-            $host = $request->post('dns');
-            $router = $request->post('router');
             $admin = $request->post('admin');
             $password = $request->post('password');
             if(config('app.host') == 'ip'){
@@ -107,9 +106,14 @@ class ListPlanes extends Component
                 'host' => $host,
                 'user' => $admin,
                 'pass' => $password,
-                'port' => 8728,
             ];
-            
+            // $datos = [
+            //     'host' => '192.168.1.6', // Reemplaza con la IP de tu router
+            //     'user' => 'jose',      // Usuario API
+            //     'pass' => '123', // Contraseña API
+            //     'port' => 8728,            // Puerto de la API
+            // ];
+
             //todas los perfiles de hotspot
             $profiles = $this->exeQueryListPlanes($datos, '/ip/hotspot/user/profile/print');
             $namesProfiles = [];
@@ -125,11 +129,7 @@ class ListPlanes extends Component
 
         } catch (Exception $e) {
             // Manejar errores de conexión o de la API
-            return response()->json([
-                'success' => false,
-                'message' => 'Escaneando... Espere, o refrescar la pagina!.',
-            ]);
-            // return response()->json(['success' => false, 'message' => 'Error de conexión con el router.', 'error' => $e->getMessage()], 500);
+            return response()->json(['success' => false, 'message' => 'Error de conexión con el router.', 'error' => $e->getMessage()], 500);
         }
     }
 
@@ -248,50 +248,5 @@ class ListPlanes extends Component
         }
 
         return view('livewire.mikrotik.hotspot.list-planes', ['profilesUser' => $profilesUser]);
-    }
-
-    public function saveComment(Request $request)
-    {
-        try {
-
-            $host = $request->post('dns');
-            $router = $request->post('router');
-            $admin = $request->post('admin');
-            $password = $request->post('password');
-            $username = $request->post('username');
-
-            
-            if(config('app.host') == 'ip'){
-                $host = $request->post('ip');
-            }else{
-                $host = $request->post('dns');
-            }
-            // Iniciar la conexión
-            $client = new Client([
-                'host' => $host,
-                'user' => $admin,
-                'pass' => $password,
-                'port' => 8728,
-            ]);
-            
-            $query = (new Query('/ip/hotspot/user/set'))
-                ->equal('name', $username)
-                ->equal('comment', 'activo');
-
-            $response = $client->query($query)->read();
-            
-            return response()->json([
-                'success' => true,
-                'message' => 'Planes extraidos satisfactoriamente!.',
-            ]);
-
-        } catch (Exception $e) {
-            // Manejar errores de conexión o de la API
-            return response()->json([
-                'success' => false,
-                'message' => 'Fallo la asignación del status al user!.',
-            ]);
-            // return response()->json(['success' => false, 'message' => 'Error de conexión con el router.', 'error' => $e->getMessage()], 500);
-        }
     }
 }

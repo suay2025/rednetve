@@ -17,8 +17,8 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @var string
      */
-    public const HOME = '/admin/dashboard';
-    //public const HOME = '/';
+    // public const HOME = '/admin/dashboard';
+    public const HOME = '/';
 
     /**
      * The controller namespace for the application.
@@ -53,7 +53,6 @@ class RouteServiceProvider extends ServiceProvider
                     require base_path('routes/web/operacion.php');
                     require base_path('routes/web/transaccion.php');
                     require base_path('routes/web/carrito.php');
-                    require base_path('routes/web/hotspot.php');
                     require base_path('routes/web/notificacion.php');
                     require base_path('routes/web/pagomovil.php');
                     require base_path('routes/web/mikrotik.php');

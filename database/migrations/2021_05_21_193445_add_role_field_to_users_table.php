@@ -15,7 +15,6 @@ class AddRoleFieldToUsersTable extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->string('role')->default('user');
-            $table->string('status')->default('activo');
         });
     }
 
@@ -28,7 +27,6 @@ class AddRoleFieldToUsersTable extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->dropColumn('role');
-            $table->dropColumn('status');
         });
     }
 }

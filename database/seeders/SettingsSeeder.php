@@ -16,9 +16,9 @@ class SettingsSeeder extends Seeder
     {
         DB::table('settings')->insert([
             'user_id' => '1',
-            'site_name' => 'WifiExpres',
-            'site_email' => 'wifiexpres@gmail.com',
-            'site_title' => 'WifiExpres',
+            'site_name' => 'PanExpres',
+            'site_email' => 'panexpres@gmail.com',
+            'site_title' => 'PanExpres',
             'footer_text' => '',
             'sidebar_collapse' => false,
             'in_cellphonecontact' => true,  

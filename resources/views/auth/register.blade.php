@@ -21,7 +21,7 @@
     <div class="card-body">
         <div class="row">
             <div class="col-lg-12 titulo c-a text-center">
-                <a href="/"><img class="logo-login-register mx-auto " src="/img/wifiexpres_banner-compressed.jpg" alt=""></a>
+                <a href="/"><img class="logo-login-register mx-auto " src="/img/panexpres_banner.png" alt=""></a>
             </div>
         </div>
         <div class="row">
@@ -41,10 +41,11 @@
             <div class="group-control mb-3">
                 <label for="roleS">Tipo de usuario</label>
                 <select class="form-control" name="roleS" id="roleS">
-                    <option value="afiliado" selected>AFILIADO</option>
+                    <option value="cliente" selected>CLIENTE</option>
+                    <option value="afiliado">AFILIADO</option>
                 </select>
             </div>
-            <input type="hidden" value="afiliado" id="role" name="role">
+            <input type="hidden" value="cliente" id="role" name="role">
             <script>
                 let selectElement = document.querySelector('#roleS')
                 selectElement.addEventListener("change", (event) => {
@@ -72,51 +73,17 @@
             </div>
 
             <div class="form-group">
-                <label for="name">Usuario <span class="text-danger">*</span></label>
+                <label for="documento">Usuario <span class="text-danger">*</span></label>
                 <div class="input-group mb-3">                
                     <input type="text" name="name" class="form-control" placeholder="Usuario">
                     <div class="input-group-append">
                         <div class="input-group-text">
-                            <span class="fas fa-user"></span>
+                            <span class="fas fa-envelope"></span>
                         </div>
                     </div>
                     @error('name')
                         <span class="text-danger">{{ $message }}</span>
                     @enderror
-                </div>
-            </div>
-
-            <div class="form-group">
-                <div class="row">
-                    <div class="col-md-6">
-                        <label for="names">Nombre <span class="text-danger">*</span></label>
-                        <div class="input-group mb-3">                
-                            <input type="text" name="names" class="form-control" placeholder="Nombre">
-                            <div class="input-group-append">
-                                <div class="input-group-text">
-                                    <span class="fas fa-user"></span>
-                                </div>
-                            </div>
-                            @error('names')
-                                <span class="text-danger">{{ $message }}</span>
-                            @enderror
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <label for="surnames">Apellido <span class="text-danger">*</span></label>
-                        <div class="input-group mb-3">                
-                            <input type="text" name="surnames" class="form-control" placeholder="Apellido">
-                            <div class="input-group-append">
-                                <div class="input-group-text">
-                                    <span class="fas fa-user"></span>
-                                </div>
-                            </div>
-                            @error('surnames')
-                                <span class="text-danger">{{ $message }}</span>
-                            @enderror
-                        </div>
-                    </div>
-
                 </div>
             </div>
             
@@ -179,14 +146,7 @@
                         </select>
                     </div>
                     <div class="col-xs-6 col-md-7 col-sm-8 col-8">
-                        <div class="input-group mb-3">
-                            <input type="text" class="form-control" name="cellphone" id="cellphone">
-                            <div class="input-group-append">
-                                <div class="input-group-text">
-                                    <span class="fas fa-phone"></span>
-                                </div>
-                            </div>
-                        </div>                        
+                        <input type="text" class="form-control" name="cellphone" id="cellphone">
                     </div>
                 </div>                
             </div>

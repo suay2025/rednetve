@@ -18,8 +18,6 @@ use App\Http\Livewire\Mikrotik\Hotspot\CreateUser;
 
 use App\Http\Livewire\Mikrotik\Hotspot\ListPlanes;
 
-use App\Http\Livewire\Admin\Users\ListUsers;
-
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -45,11 +43,6 @@ Route::get('createUserSession', [CreateUser::class, 'addNew']);
 
 //Route::get('listPlanes', [ListPlanes::class, 'listPlanes']);
 Route::post('listPlanes', [ListPlanes::class, 'listPlanes']);
-
-Route::post('saveComment', [ListPlanes::class, 'saveComment']);
-
-Route::post('registerUser', [ListUsers::class, 'registerUser']);
-
 
 Route::post('hotspot-login', [CreateUser::class, 'login1']);
 

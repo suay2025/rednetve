@@ -1,11 +1,5 @@
-:root {
-    --main-bg-color:  #6500DB;
-    --main-btn-color: #FC5E27;
-    --main-bg-footer: #FC5E27;
-}
-
 .navigationMap{
-    background-color: var(--main-bg-color);
+    background-color: #873E07;
     width: 100%;
     height: auto;
     color: #fff;

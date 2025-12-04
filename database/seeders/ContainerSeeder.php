@@ -44,7 +44,34 @@ class ContainerSeeder extends Seeder
 
         //
 
-        
+        DB::table('containers')->insert([
+            'name' => 'Caja',
+            'comercio_id' => '2',
+            'created_at' => '2022-05-16 12:20:36',
+            'updated_at' => '2022-05-16 12:20:36'
+        ]);
+
+        DB::table('containers')->insert([
+            'name' => 'Envase 1 lts',
+            'comercio_id' => '2',
+            'created_at' => '2022-05-16 12:20:36',
+            'updated_at' => '2022-05-16 12:20:36'
+        ]);
+
+        DB::table('containers')->insert([
+            'name' => 'Envase 5 lts',
+            'comercio_id' => '2',
+            'created_at' => '2022-05-16 12:20:36',
+            'updated_at' => '2022-05-16 12:20:36'
+        ]);
+
+        DB::table('containers')->insert([
+            'name' => 'Saco',
+            'comercio_id' => '2',
+            'created_at' => '2022-05-16 12:20:36',
+            'updated_at' => '2022-05-16 12:20:36'
+        ]);
+
         //
 
        

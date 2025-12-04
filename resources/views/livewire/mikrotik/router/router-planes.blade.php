@@ -49,12 +49,9 @@
                                                 @endforeach
                                             </div>
                                             <div class="card-footer d-flex justify-content-between">
-                                                <a href="" wire:click.prevent="edit('{{ $array['name'] }}')">
-                                                    <i class="fa fa-edit mr-2"></i>
-                                                </a>
                                                 <!-- <button wire:click.prevent="addNewUserHotspot('{{ $array['name'] }}')" class="btn btn-primary"><i class="fa fa-users"></i> Nuevo ()</button>
                                                 <button class="btn btn-success">Activos</button> -->
-                                                <a href="" wire:click.prevent="confirmProfileRemoval('{{ $array['.id'] }}')">
+                                                <a href="" wire:click.prevent="deleteProfile('{{ $array['.id'] }}')">
                                                     <i class="fa fa-trash text-danger"></i>
                                                 </a>
                                             </div>
@@ -211,26 +208,6 @@
                     </div>
                 </div>
             </form>
-        </div>
-    </div>
-
-    <!-- Modal -->
-    <div class="modal fade" id="confirmationModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" wire:ignore.self>
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5>Eliminar Plan</h5>
-                </div>
-
-                <div class="modal-body">
-                    <h4>Esta seguro de querer eliminar este plan?</h4>
-                </div>
-
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-times mr-1"></i> Cancelar</button>
-                    <button type="button" wire:click.prevent="deleteProfile" class="btn btn-danger"><i class="fa fa-trash mr-1"></i>Eliminar Plan</button>
-                </div>
-            </div>
         </div>
     </div>
 

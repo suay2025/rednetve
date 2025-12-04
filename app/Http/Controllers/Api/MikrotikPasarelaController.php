@@ -26,109 +26,97 @@ class MikrotikPasarelaController extends Controller
 
     public function mikrotikPasarela(Request $request)
 	{
-		//Primero se crea la cuenta en el mikrotik y luego se cobra
-		// el plan
-		//$plan = json_decode($request->post('planPasarela'));
-		//$reference = $request->post('reference') . '/' . $request->post('cellphone') . '/' . $request->post('nrorouter'). '/' .$plan->plan.'/'.$plan->costo;
-		$reference = $request->post('reference');  
-		$cellphone = $request->post('cellphone');  
-		$telefono = $request->post('cellphone');
-		$nrorouter = $request->post('nrorouter');  
-		$plan = $request->post('plan');  
-		$costo = $request->post('amount');  
+		// Accede a los datos enviados
+        $datos = $request->all();
 		
-		$newUser = $this->createUserHotspot($nrorouter, $telefono, $plan.'/'.$costo);
+		//Creación de solicitud de pago
+        $Payment = new IpgBdvPaymentRequest();  
 
-		if($newUser['status'] == true)
-		{
-			// Accede a los datos enviados
-			$datos = $request->all();
-			
-			//Creación de solicitud de pago
-			$Payment = new IpgBdvPaymentRequest();  
+		$plan = json_decode($request->post('planPasarela'));
+		$reference = $request->post('reference') . '/' . $request->post('cellphone') . '/' . $request->post('nrorouter'). '/' .$plan->plan.'/'.$plan->costo;
 
-			//$plan = json_decode($request->post('planPasarela'));
-			$reference = $request->post('reference') . '/' . $request->post('cellphone') . '/' . $request->post('nrorouter'). '/' .$request->post('plan').'/'.$request->post('amount');
+		//$reference = $request->post('reference') . '/' . $request->post('cellphone') . '/' . $request->post('nrorouter');
+		
+		$Payment->idLetter= $request->post('identificationNac'); //Letra de la cédula - V, E o P
+        $Payment->idNumber= $request->post('identificationNumber'); //Número de cédula
+        $Payment->amount= $request->post('amount'); //Monto a combrar, DECIMAL
+        $Payment->currency= $request->post('currency'); //Moneda del pago, 0 - Bolivar Fuerte, 1 - Dolar
+        $Payment->reference= $reference; //Código de referecia o factura
+        $Payment->title= $request->post('title'); //Titulo para el pago, Ej: Servicio de Cable
+        $Payment->description= $request->post('description'); //Descripción del pago, Ej: Abono mes de marzo 2017
+        $Payment->email= $request->post('email');
+        $Payment->cellphone= $request->post('cellphone');    
+		
+		$user = $request->post('user');
+		
+        //$Payment->urlToReturn= $_SERVER['REQUEST_SCHEME']."://".$_SERVER['HTTP_HOST'].'/ipg2-bdv-demo/success.php?token={ID}'; //URL de retrono al finalizar el pago
 
-			//$reference = $request->post('reference') . '/' . $request->post('cellphone') . '/' . $request->post('nrorouter');
-			
-			$Payment->idLetter= $request->post('identificationNac'); //Letra de la cédula - V, E o P
-			$Payment->idNumber= $request->post('identificationNumber'); //Número de cédula
-			$Payment->amount= $request->post('amount'); //Monto a combrar, DECIMAL
-			$Payment->currency= $request->post('currency'); //Moneda del pago, 0 - Bolivar Fuerte, 1 - Dolar
-			$Payment->reference= $reference; //Código de referecia o factura
-			$Payment->title= $request->post('title'); //Titulo para el pago, Ej: Servicio de Cable
-			$Payment->description= $request->post('description'); //Descripción del pago, Ej: Abono mes de marzo 2017
-			$Payment->email= $request->post('email');
-			$Payment->cellphone= $request->post('cellphone');    
-			
-			//$user = $request->post('user');
-			
-			//$Payment->urlToReturn= $_SERVER['REQUEST_SCHEME']."://".$_SERVER['HTTP_HOST'].'/ipg2-bdv-demo/success.php?token={ID}'; //URL de retrono al finalizar el pago
+		$Payment->urlToReturn= "https://"."://".$_SERVER['HTTP_HOST'].'/ipg2-bdv-demo/success.php?token={ID}'; //URL de retrono al finalizar el pago
 
-			$Payment->urlToReturn= "https://"."://".$_SERVER['HTTP_HOST'].'/ipg2-bdv-demo/success.php?token={ID}'; //URL de retrono al finalizar el pago
+        //$Payment->urlToReturn= "http://localhost:8585/";
+        // $Payment->urlToReturn= "https://ddrsistemas.com/pasarelape/procesado.php";
 
-			//$Payment->urlToReturn= "http://localhost:8585/";
-			// $Payment->urlToReturn= "https://ddrsistemas.com/pasarelape/procesado.php";
+		//usado para panexpres.com
+        //$Payment->urlToReturn= "https://panexpres.com/pagosatisfactorio/{ID}";	
 
-			//usado para panexpres.com
-			//$Payment->urlToReturn= "https://panexpres.com/pagosatisfactorio/{ID}";	
+		//usado para Mikrotik
+		$Payment->urlToReturn= "https://panexpres.com/pagosatisfactorioMikrotik/{ID}";
 
-			//usado para Mikrotik
-			$Payment->urlToReturn= "https://wifiexpres.com/pagosatisfactorioMikrotik/{ID}";
+        $Payment->rifLetter= $request->post('rifLetter') ?? ''; //Letra de la cédula - V, E o P
+        $Payment->rifNumber= $request->post('rifNumber') ?? ''; //Número de cédula
+		
+		$demo = "NO";
 
-			$Payment->rifLetter= $request->post('rifLetter') ?? ''; //Letra de la cédula - V, E o P
-			$Payment->rifNumber= $request->post('rifNumber') ?? ''; //Número de cédula
-			
-			$demo = "NO";
+        if( $demo == "SI" ) {
+            $PaymentProcess = new IpgBdv2 ("70527030","z0tTsYq3");
+        } else {
+             $PaymentProcess = new IpgBdv2 ("76669805","0Ih2wwzK");
+        }
 
-			if( $demo == "SI" ) {
-				$PaymentProcess = new IpgBdv2 ("70527030","z0tTsYq3");
-			} else {
-				$PaymentProcess = new IpgBdv2 ("76669805","0Ih2wwzK");
-			}
+        $response = $PaymentProcess->createPayment($Payment);
+        
+        if ($response->success == true) // Se procesó correctamente y es necesario redirigir a la página de pago
+        {
+			$resultado = 'true';
+			$urlPayment = $response->urlPayment;
+			// if (strtolower(filter_input(INPUT_SERVER, 'HTTP_X_REQUESTED_WITH')) === 'xmlhttprequest') { //si es ajax
+            //      header('Content-type: application/json');
+            //      echo json_encode($response);			
+            //  }
+            //  else{ //si no es ajax
+            //      header("Location: ".$response->urlPayment); //W
+            //      die();
+            //  }		
+        }
+        else
+        {
+			$resultado = 'false';
+             header('Content-type: application/json');
+             echo json_encode($response);
+        }
+		/*
+		*/	
+        $remote_addr = $_SERVER['REMOTE_ADDR'];	
 
-			$response = $PaymentProcess->createPayment($Payment);
-			
-			if ($response->success == true) // Se procesó correctamente y es necesario redirigir a la página de pago
-			{
-				$resultado = 'true';
-				$urlPayment = $response->urlPayment;
-				// if (strtolower(filter_input(INPUT_SERVER, 'HTTP_X_REQUESTED_WITH')) === 'xmlhttprequest') { //si es ajax
-				//      header('Content-type: application/json');
-				//      echo json_encode($response);			
-				//  }
-				//  else{ //si no es ajax
-				//      header("Location: ".$response->urlPayment); //W
-				//      die();
-				//  }		
-			}
-			else
-			{
-				$resultado = 'false';
-				header('Content-type: application/json');
-				echo json_encode($response);
-			}
-			/*
-			*/	
-			$remote_addr = $_SERVER['REMOTE_ADDR'];	
-
-			return response()->json([					
-					'responseCode' => 200,
-					'responseMessage' => 'Reenvio a url',
-					'success' => true,
-					'response' => $response,
-					'urlPayment' => $response->urlPayment,
-				], 200)->header('Access-Control-Allow-Origin', '*');
-		}else{
-			return response()->json([
-				'responseCode' => '555',
-				'responseMessage' => 'Fallo en el creación del Usuario Router',
-				'success' => false, 
-				'error' => '560', 
-				'newUser' => $newUser,
-			]);
-		}		
+		return response()->json([
+                // 'message' => 'Datos recibidos completos',
+                // 'identificationNac' => $request->post('identificationNac'),
+				// 'identificationNumber' => $request->post('identificationNumber'),
+				// 'amount' => $request->post('amount'),
+				// 'currency' => $request->post('currency'),
+				// 'reference' => $request->post('reference'),
+				// 'title' => $request->post('title'),
+				// 'description' => $request->post('description'),
+				// 'email' => $request->post('email'),
+				// 'cellphone' => $request->post('cellphone'),
+				// 'cellphone1' => $request->post('cellphone1'),
+				// 'rifLetter' => $request->post('rifLetter'),
+				// 'rifNumber' => $request->post('rifNumber'),
+				// 'datos' => $datos,
+				// 'resultado' => $resultado,
+				// 'urlPayment' => $response->urlPayment,
+				'response' => $response
+            ], 200)->header('Access-Control-Allow-Origin', '*');
 		
 	}
 
@@ -172,25 +160,10 @@ class MikrotikPasarelaController extends Controller
 				'active' => false,
 			]);
 
-			// buscar password
-			$user = UserMikrotik::where('name', $telefono)->first();
+			// Crear usuario
+			$newUser = $this->createUserHotspot($nrorouter, $telefono, $plan.'/'.$costo);
 
-			//cambiar plan
-			$this->router = Router::where('nrorouter', $nrorouter)->first();
-			
-			$client = $this->configRouter();
-			//$mikrotik_id = $this->searchId_mikrotik($client, $user);
-			// Modificar profile
-			$profileEnd = $plan . '/' . $datos->amount;
-			$resultProfile = $this->updateProfile($user->mikrotik_id, $user->password, $profileEnd);
-
-			$newUser = [
-					'user' => $telefono,
-					'password' => $user->password,
-					'status' => true,
-				];
-
-			return $newUser;
+            return $newUser;
 
         }else{
 			$newUser = [
@@ -204,51 +177,29 @@ class MikrotikPasarelaController extends Controller
 
 	public function configRouter()
     {
-        try {
-			if(config('app.host') == 'ip'){
-				$host = $this->router->ip;
-			}else{
-				$host = $this->router->dns;
-				//$host = 'typej.ddns.net';
-				//$host = '192.168.1.6';
-			}        
-			
-			// Iniciar la conexión
-			$client = new Client([
-				'host' => $host,
-				'user' => $this->router->admin,
-				'pass' => $this->router->password,
-				'port' => 8728,
-			]);
+        if(config('app.host') == 'ip'){
+            $host = $this->router->ip;
+        }else{
+            $host = $this->router->dns;
+            //$host = 'typej.ddns.net';
+            //$host = '192.168.1.6';
+        }        
+        
+        // Iniciar la conexión
+        $client = new Client([
+            'host' => $host,
+            'user' => $this->router->admin,
+            'pass' => $this->router->password,
+            'port' => 8728,
+        ]);
 
-			return $client;
-
-			} catch (Exception $e) {
-
-				$newUser = [
-					'user' => '',
-					'password' => '',
-					'status' => false,
-					'error' => 510, 
-				];
-
-				return response()->json([
-					'responseCode' => 502,
-					'responseMessage' => 'error cccc',
-					'success' => false,
-					'user'  => $newUser, 
-					'error' => 510, 
-				]);
-				
-				
-			} 
-		
+        return $client;
     }
 
 	public function createUserHotspot($nrorouter, $user, $profile)
     {
         try {
-
+			
 			$this->router = Router::where('nrorouter', $nrorouter)->first();
 
 			$client = $this->configRouter();
@@ -259,15 +210,20 @@ class MikrotikPasarelaController extends Controller
 			if(!$userMikrotik)
 			{
 				$password = $this->randomPassword();
-				// Modificar profile
-				$profileAux = 'PLANNEUTRO/0';
+
+				$userMikrotik = UserMikrotik::create([
+					'server' => $server,
+					'name' => $user,
+					'password' => $password,
+					'profile' => $profile,
+				]);
 
 				// Crear la consulta para añadir el usuario
 				$query = (new Query('/ip/hotspot/user/add'))
 					->equal('server', 'all')
 					->equal('name', $user)
 					->equal('password', $password)
-					->equal('profile', $profileAux);
+					->equal('profile', $profile);
 				
 				// Ejecutar la consulta
 				$client->query($query)->read();
@@ -284,15 +240,12 @@ class MikrotikPasarelaController extends Controller
 				// 	->where('name', $user);
 				// $response = $client->query($query)->read();
 				$mikrotik_id = $this->searchId_mikrotik($client, $user);
-				
-				//$resultProfile = $this->updateProfile($mikrotik_id, $password, $profileAux);
 
 				$userMikrotik = UserMikrotik::create([
                         'mikrotik_id' => $mikrotik_id, 
                         'name'=>$user,
                         'server'=>$server,
                         'profile'=>$profile,                        
-						'password'=>$password,  
                     ]);
 
 			}else{
@@ -303,39 +256,18 @@ class MikrotikPasarelaController extends Controller
                     ];
 				$userMikrotik->update(['profile'=>$profile]);
 				$mikrotik_id = $userMikrotik->mikrotik_id;
-
 				$password = $userMikrotik->password;
 				if(!$mikrotik_id){
 					$mikrotik_id = $this->searchId_mikrotik($client, $user);
 					$userMikrotik->update(['mikrotik_id'=>$mikrotik_id]);
 				}
-
-				//si se borro del mikrotik pero esta en bd, ultimo codigo en ser agregado
-				if(!$this->searchId_mikrotik($client, $user)){
-					//crear en mikrotik
-					// Crear la consulta para añadir el usuario
-					$query = (new Query('/ip/hotspot/user/add'))
-						->equal('server', $server)
-						->equal('name', $user)
-						->equal('password', $password)
-						->equal('profile', $profile);
-					
-					// Ejecutar la consulta
-					$client->query($query)->read();
-					// Tarea completada.
-					// buscar id
-					// $query = (new Query('/ip/hotspot/user/print'))
-					//     ->where('name', $user);
-					// $response = $client->query($query)->read();
-					$mikrotik_id = $this->searchId_mikrotik($client, $user);
-					
-					$userMikrotik = UserMikrotik::where('user_id', $this->user->id)->first();
-					$userMikrotik->update(['mikrotik_id' => $mikrotik_id]);
-
-				}
 				// Modificar profile
-				$profileAux = 'PLANNEUTRO/0';
-				$resultProfile = $this->updateProfile($mikrotik_id, $password, $profileAux);
+				$query = (new Query('/ip/hotspot/user/set'))
+					->equal('.id', $mikrotik_id)
+					->equal('password', $password)
+					->equal('profile', $profile);
+
+				$response = $client->query($query)->read();
 
 				$this->cleanUptime($mikrotik_id, $newUptime = "00:00:00");
 			}
@@ -357,26 +289,13 @@ class MikrotikPasarelaController extends Controller
 				'password' => '',
 				'status' => false,
 			];
-			return $newUser;			
-		}
+
+			return $newUser;
+			
+		} 
+
 		//$validatedData['password'] = bcrypt($validatedData['password']);
     }
-
-	public function updateProfile($mikrotik_id, $password, $profile)
-	{
-		try {
-			$client = $this->configRouter();
-			// Modificar profile
-			$query = (new Query('/ip/hotspot/user/set'))
-				->equal('.id', $mikrotik_id)
-				->equal('password', $password)
-				->equal('profile', $profile);
-
-			$response = $client->query($query)->read();
-		} catch (Exception $e) {
-			//throw $th;
-		}
-	}
 
 	public function searchId_mikrotik($client, $user)
 	{

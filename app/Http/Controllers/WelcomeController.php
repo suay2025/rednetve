@@ -193,7 +193,7 @@ class WelcomeController extends Controller
             
         }
         // Fin evaluar currency
-        
+
         return view('welcome', [
             'words' => $words,
             'manufacturer_id' => $manufacturer_id,

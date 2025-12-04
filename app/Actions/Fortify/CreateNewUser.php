@@ -28,8 +28,6 @@ class CreateNewUser implements CreatesNewUsers
             'identificationNac' => ['required', 'string', 'max:1'],
             'identificationNumber' => ['required', 'string', 'max:12'],
             'name' => ['required', 'string', 'max:255'],
-            'names' => ['required', 'string', 'max:255'],
-            'surnames' => ['required', 'string', 'max:255'],
             'email' => [
                 'required',
                 'string',
@@ -44,15 +42,13 @@ class CreateNewUser implements CreatesNewUsers
         {
             $active = 0;
         }else{
-            $active = 0;
+            $active = 1;
         }
         
         $user = User::create([
             'identificationNac' => $input['identificationNac'],
             'identificationNumber' => $input['identificationNumber'],
             'name' => $input['name'],
-            'names' => $input['names'],
-            'surnames' => $input['surnames'],
             'email' => $input['email'],
             'role' => $input['role'],
             'active' => $active,

@@ -13,9 +13,8 @@
                                 <input type="hidden" id="user" name="user" value="{{ $user }}">
                                 <input type="hidden" id="password" name="password" value="{{ $password }}">
                                 <h4>Operación procesada con éxito</h4>
-                                <input type="hidden" id="status" name="status" value="{{ $status }}">
                                 <p>
-                                  Inicio de sesión en <span class="h4 text-danger" id="contador"></span>
+                                  Inicio de sesión en <span class="h4 text-danger" id="contador">5 segundos</span>
                                 </p>
                             </div>
                             <div class="card-footer d-flex justify-content-end">
@@ -30,7 +29,7 @@
                                     // El primer argumento es los datos y el segundo es el origen del padre
                                     window.parent.postMessage(miObjeto, '*'); // Enviar a cualquier origen por simplicidad, pero se recomienda especificar el origen del padre para seguridad.
                                 }
-                                var contador = 3
+                                var contador = 5
                                 function cuentaRegresiva(contador){                                    
                                     const idIntervalo = setInterval(() => {
                                         console.log(contador); // Muestra el valor actual del contador
@@ -48,7 +47,7 @@
                                 const timeoutId = setTimeout(() => {
                                     enviarDatoAlPadre()
                                     clearTimeout(timeoutId)
-                                }, 2000)
+                                }, 5000)
 
                                 
                             </script>

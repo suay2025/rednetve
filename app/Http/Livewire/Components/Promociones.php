@@ -8,24 +8,15 @@ class Promociones extends Component
 {
     public function render()
     {
-        
-        $promociones = null;
-        $promocionFirst = null;
-
-        
         $promocionFirst= Promocion::query()
         ->where('active', 'active')
         ->orderBy('order', 'asc')
         ->first();
-
-        if($promocionFirst){
-            $promociones = Promocion::query()
-                ->where('active', 'active')
-                ->whereNotIn('id', [$promocionFirst->id])
-                ->orderBy('order', 'asc')
-                ->get();
-        }
-        
+        $promociones = Promocion::query()
+			->where('active', 'active')
+            ->whereNotIn('id', [$promocionFirst->id])
+            ->orderBy('order', 'asc')
+            ->get();
 
         return view('livewire.components.promociones', [
             'promociones' => $promociones,

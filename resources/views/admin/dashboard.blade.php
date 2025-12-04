@@ -22,26 +22,9 @@
   <div class="content">
     <div class="container-fluid">
     <div class="row">
-        @if(auth()->user()->role=='admin')
-        <livewire:admin.dashboard.users-mikrotik-count />
-        <livewire:admin.dashboard.ventas-tickets-count />
-        @endif
-        @if(auth()->user()->role=='aliado')
-            <livewire:admin.dashboard.crear-tickets-dashboard />    
-            <livewire:admin.dashboard.tickets-vendidos-dashboard />
-        @endif
-      </div>
-    </div><!-- /.container-fluid -->
-    <div class="row">
-        @if(auth()->user()->role=='admin')
-        <livewire:admin.dashboard.users-mikrotik-count />
-        <livewire:admin.dashboard.ventas-tickets-count />
-        @endif
-        @if(auth()->user()->role=='aliado')
-            <livewire:admin.dashboard.users-mikrotik-count />
-            <livewire:admin.dashboard.tickets-count />
-            <livewire:admin.dashboard.ventas-tickets-count />
-          
+        @if(auth()->user()=='admin')
+        <livewire:admin.dashboard.appointments-count />
+        <livewire:admin.dashboard.users-count />
         @endif
       </div>
     </div><!-- /.container-fluid -->

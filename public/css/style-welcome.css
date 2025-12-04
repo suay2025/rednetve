@@ -1,10 +1,9 @@
 :root { 
-        --main-bg-color:  #6500DB;
+        --main-bg-color:  #4447eb; 
         --menu-background: #FC5E27; 
         --menu-background-hover: #fa8f6c; 
         --menu-background-overlay: #fa8f6c; 
         --main-footer-color: #FFCC2A; 
-        --main-bg-footer: #FC5E27;
       }
 
 body, html{ margin:0; padding:0; /*background-color: yellowgreen;*/}
@@ -68,7 +67,7 @@ a {text-decoration: none; }
 
 .footer{ margin-top: auto; width: 100% !important; height: auto !important; text-decoration: solid !important; font-weight: bold !important;/*display: none;*/   }
 
-.footer-color{ background-color: var(--main-bg-footer); color: white; }
+.footer-color{ background-color: var(--menu-background); color: white; }
 
 .footer-img{ width: 40%!important; }
 

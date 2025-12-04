@@ -23,13 +23,9 @@ window.addEventListener('hide-delete-modal', function (event) {
   $('#confirmationModal').modal('hide');
   toastr.success(event.detail.message, 'Success!');
 });
-window.addEventListener('alert', event => { 
-             toastr[event.detail.type](event.detail.message, 
-             event.detail.title ?? ''), toastr.options = {
-                    "closeButton": true,
-                    "progressBar": true,
-                }
-            });
+window.addEventListener('alert', function (event) {
+  toastr.success(event.detail.message, 'Success!');
+});
 window.addEventListener('updated', function (event) {
   toastr.success(event.detail.message, 'Success!');
 });

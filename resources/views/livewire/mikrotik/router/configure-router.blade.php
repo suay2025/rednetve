@@ -63,15 +63,6 @@
                                         </div>
                                     </a>
                                 </div>
-                                <div class="col-md-3">
-                                    <a href="/routerPlanesAfiliado/{{ $router->id }}">
-                                        <div class="card secundary-card">
-                                            <div class="card-body text-center">
-                                                <h4>Planes Afiliado</h4>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
                             </div>
                         </div>
                         <div class="card-footer d-flex justify-content-end">

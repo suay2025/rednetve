@@ -36,10 +36,9 @@ class AuthController extends Controller
     public function autenticar(Request $request)
     {
         //Validación de datos (incluyendo la de activo)
-        if($request->post('cellphone')){
+        if($request->post('identificationNumber')){
             $credentials = $request->validate([
-                'cellphonecode' => ['required'],
-                'cellphone' => ['required'],
+                'identificationNumber' => ['required'],
                 'password' => ['required']
             ]);    
         }else{

@@ -47,7 +47,7 @@ class Comercio extends Model
         if ($this->avatar && Storage::disk('avatarscomercios')->exists($this->avatar)) {   
             return Storage::disk('avatarscomercios')->url($this->avatar);
         }
-        return asset('/img/wifiexpres_logo.png');
+        return asset('/img/panexpres_logo.png');
         //return asset('noimage.png');
     }
 

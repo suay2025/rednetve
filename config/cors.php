@@ -20,7 +20,7 @@ return [
     'allowed_methods' => ['*'],
 
     // 'allowed_origins' => ['*', 'http://localhost:8000', 'http://127.0.0.1:8000', 'https://panexpres.com', 'http://wifi.local', 'http://192.168.2.1', 'http://192.168.0.107'],
-    'allowed_origins' => ['*', 'https://wifiexpres.com', 'https://panexpres.com', 'http://wifi.local'],
+    'allowed_origins' => ['*', 'https://panexpres.com', 'http://wifi.local'],
 
     'allowed_origins_patterns' => [],
 

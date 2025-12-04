@@ -11,6 +11,8 @@ use Illuminate\Validation\Rule;
 
 class ListRouters extends AdminComponent
 {
+
+
 	use WithFileUploads;
 
 	public $state = [];
@@ -64,7 +66,6 @@ class ListRouters extends AdminComponent
 			'admin' => 'required',
             'password' => 'required',
             'location' => 'required',
-			'nrorouter' => 'required|unique:routers,nrorouter',
 		])->validate();
 
 		$validatedData['user_id'] = auth()->user()->id;

@@ -23,12 +23,9 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password')->nullable();
-            $table->string('password_mikrotik')->nullable();
             $table->string('external_id')->nullable();
             $table->string('external_auth')->nullable();
             $table->integer('active')->default(1);
-            $table->string('nrorouter')->nullable();
-            $table->string('profile')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

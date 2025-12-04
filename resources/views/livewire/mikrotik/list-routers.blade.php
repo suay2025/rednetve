@@ -48,7 +48,6 @@
                                         </th>
                                         <th scope="col">Mac Address</th>
                                         <th scope="col">Localización</th>
-                                        <th scope="col">N° Router</th>
                                         <th scope="col">Opciones</th>
                                     </tr>
                                 </thead>
@@ -61,7 +60,6 @@
                                         <td>{{ $router->ip }}</td>
                                         <td>{{ $router->macAddress }}</td>
                                         <td>{{ $router->location }}</td>
-                                        <td>{{ $router->nrorouter }}</td>
                                         <td>
                                             <a href="" wire:click.prevent="edit({{ $router }})">
                                                 <i class="fa fa-edit mr-2"></i>
@@ -112,16 +110,6 @@
                         </button>
                     </div>
                     <div class="modal-body">
-
-                        <div class="form-group">
-                            <label for="nrorouter">N° Router</label>
-                            <input type="text" wire:model.defer="state.nrorouter" class="form-control @error('nrorouter') is-invalid @enderror" id="nrorouter" aria-describedby="nrorouterHelp" placeholder="Introduzca N° Router">
-                            @error('nrorouter')
-                            <div class="invalid-feedback">
-                                {{ $message }}
-                            </div>
-                            @enderror
-                        </div>
                         
                         <div class="form-group">
                             <label for="identity">Identity</label>

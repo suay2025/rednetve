@@ -50,7 +50,7 @@
                             <span class="h4 mx-4">Resultado de: {{$parametro}} </span>  
                         </div>
                     </div>
-                    @if(!$parametro)
+                    @if($parametro)
                         @forelse ($products as $index => $product)
                         <div class="card p-3 border border-1 cuadro m-3 h-auto">
                             <div class="row mx-2 border border-1 p-3">

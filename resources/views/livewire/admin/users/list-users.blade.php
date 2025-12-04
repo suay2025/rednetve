@@ -3,12 +3,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0 text-dark">Aliados</h1>
+                    <h1 class="m-0 text-dark">Usuarios</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="/admin/dashboard">Escritorio</a></li>
-                        <li class="breadcrumb-item active">Aliados</li>
+                        <li class="breadcrumb-item active">Usuarios</li>
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
@@ -48,8 +48,7 @@
                                         <th scope="col">Teléfono</th>
                                         <th scope="col">Registerd Date</th>
                                         <th scope="col">Rol</th>
-                                        <th scope="col">Status</th>
-                                        <th scope="col">Opciones</th>                                        
+                                        <th scope="col">Opciones</th>
                                     </tr>
                                 </thead>
                                 <tbody wire:loading.class="text-muted">
@@ -68,13 +67,7 @@
                                                 <option value="admin" {{ ($user->role === 'admin') ? 'selected' : '' }}>ADMIN</option>
                                                 <option value="user" {{ ($user->role === 'user') ? 'selected' : '' }}>USUARIO</option>
                                                 <option value="user" {{ ($user->role === 'cliente') ? 'selected' : '' }}>CLIENTE</option>
-                                                <option value="aliado" {{ ($user->role === 'aliado') ? 'selected' : '' }}>ALIADO</option>
-                                            </select>
-                                        </td>
-                                        <td>
-                                            <select class="form-control" wire:change="changeStatus({{ $user }}, $event.target.value)">
-                                                <option value="activo" {{ ($user->status === 'activo') ? 'selected' : '' }}>ACTIVO</option>
-                                                <option value="suspendido" {{ ($user->status === 'suspendido') ? 'selected' : '' }}>SUSPENDIDO</option>
+                                                <option value="afiliado" {{ ($user->role === 'afiliado') ? 'selected' : '' }}>AFILIADO</option>
                                             </select>
                                         </td>
                                         <td>

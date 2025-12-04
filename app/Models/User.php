@@ -20,10 +20,8 @@ class User extends Authenticatable implements MustVerifyEmail
     const ROLE_ADMIN = 'admin';
     const ROLE_USER = 'user';
     const ROLE_CLIENTE = 'cliente';
-    const ROLE_ALIADO = 'aliado';
+    const ROLE_AFIL = 'afiliado';
     const ROLE_DELIVERY = 'delivery';
-    const ACTIVO = 'activo';
-    const SUSPENDIDO = 'suspendido';
 
     /**
      * The attributes that are mass assignable.
@@ -38,15 +36,11 @@ class User extends Authenticatable implements MustVerifyEmail
         'name',
         'email',
         'password',
-        'password_mikrotik',
         'avatar',
         'role',
-        'status',
         'external_id',
         'external_auth',
         'active',
-        'nrorouter',
-        'profile',
     ];
 
     /**
@@ -111,9 +105,9 @@ class User extends Authenticatable implements MustVerifyEmail
         return true;
     }
 
-    public function isAliado()
+    public function isAfil()
     {
-        if ($this->role !== self::ROLE_ALIADO) {
+        if ($this->role !== self::ROLE_AFIL) {
             return false;
         }
 
@@ -195,7 +189,5 @@ class User extends Authenticatable implements MustVerifyEmail
             $message->subject($titulo);
         });
     }
-
-    
 
 }

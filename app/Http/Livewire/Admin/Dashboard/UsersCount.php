@@ -15,11 +15,7 @@ class UsersCount extends Component
     }
 
     public function getUsersCount($option = 'TODAY')
-    {   
-        $this->usersCount = User::query();
-        if(auth()->user()->role !== 'admin'){
-            $this->usersCount = $this->usersCount->where('user_id', auth()->user()->id);
-        }
+    {
         $this->usersCount = User::query()
             ->whereBetween('created_at', $this->getDateRange($option))
             ->count();

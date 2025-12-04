@@ -487,8 +487,9 @@ class HotspotUsers extends Component
 
             if($this->name !== 'all')
             {
-                //$query = $query->where('server', $this->name);
+                $query = $query->where('server', $this->name);
             }
+
 
             $this->users = $client->query($query)->read();
 

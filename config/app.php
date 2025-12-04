@@ -15,7 +15,7 @@ return [
 
     'name' => env('APP_NAME', 'Laravel'),
 
-    'site_title' => 'WifiExpres',
+    'site_title' => 'PanExpres',
 
     'currencyGlobal' => env('APP_CURRENCY', 'Bs'),
 

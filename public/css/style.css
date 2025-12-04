@@ -13,13 +13,9 @@
 }
 
 :root {
-    --main-bg-color:  #6500DB;
+    --main-bg-color:  #4447eb;
     --main-btn-color: #FC5E27;
-    --main-bg-color:  #6500DB;
-}
-
-.bg-general {
-    background-color: var(--main-bg-color);
+    --main-footer-color: #FFCC2A;
 }
 
 body {

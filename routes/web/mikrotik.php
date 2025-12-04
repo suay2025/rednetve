@@ -8,7 +8,6 @@ use App\Http\Livewire\Mikrotik\Router\ConfigureRouter;
 use App\Http\Livewire\Mikrotik\Router\RouterUsers;
 use App\Http\Livewire\Mikrotik\Router\RouterHotspots;
 use App\Http\Livewire\Mikrotik\Router\RouterPlanes;
-use App\Http\Livewire\Mikrotik\Router\RouterPlanesAfiliado;
 use App\Http\Livewire\Mikrotik\User\TimeOut;
 use App\Http\Livewire\Mikrotik\Router\HotspotUsers;
 
@@ -17,13 +16,13 @@ use App\Http\Livewire\Mikrotik\Hotspot\ListHotspot;
 use App\Http\Livewire\Mikrotik\Hotspot\CrearTicket;
 use App\Http\Livewire\Mikrotik\Hotspot\CrearTicketPhone;
 use App\Http\Livewire\Mikrotik\Hotspot\CreateUser;
-use App\Http\Livewire\Mikrotik\Hotspot\ListUsersAliados;
 use App\Http\Controllers\LoginMikrotik;
 use App\Http\Livewire\Mikrotik\Hotspot\ListPlanes;
 use App\Http\Controllers\Api\MikrotikPasarelaController;
-use App\Http\Livewire\Mikrotik\Hotspot\ListEventos;
 
 use Illuminate\Support\Facades\Response;
+
+
 
 Route::get('/listRouters', ListRouters::class)->name('listRouters')->middleware('auth');
 
@@ -37,8 +36,6 @@ Route::get('/routerHotspots/{router_id}', RouterHotspots::class)->name('routerHo
 
 Route::get('/routerPlanes/{router_id}', RouterPlanes::class)->name('routerPlanes')->middleware('auth');
 
-Route::get('/routerPlanesAfiliado/{router_id}', RouterPlanesAfiliado::class)->name('routerPlanesAfiliado')->middleware('auth');
-
 Route::get('/usersMikrotik', ListUsersMikrotik::class)->name('usersMikrotik')->middleware('auth');
 
 Route::get('/ListHotspot', ListHotspot::class)->name('ListHotspot')->middleware('auth');
@@ -51,11 +48,7 @@ Route::get('/crearTicketPhone', CrearTicketPhone::class)->name('crearTicketPhone
 
 Route::get('/createUser', CreateUser::class)->name('createUser')->middleware('auth');
 
-Route::get('/listUsersAliados', ListUsersAliados::class)->name('listUsersAliados')->middleware('auth');
-
 Route::get('/listPlanesHotspot', ListPlanes::class)->name('listPlanesHotspot')->middleware('auth');
-
-Route::get('/listEventos', ListEventos::class)->name('listEventos')->middleware('auth');
 
 Route::get('/timeOut', TimeOut::class)->name('timeOut')->middleware('auth');
 
@@ -63,7 +56,6 @@ Route::get('/hotspot-users/{nrorouter}/{name}', HotspotUsers::class)->name('hots
 
 // Operaciones para la pasarela del mikrotik
 Route::get('/pagosatisfactorioMikrotik/{id}', function ( $id ) {
-
     $newUser = [];
     $newUser = '';
     $id_suc = $id;
@@ -73,11 +65,11 @@ Route::get('/pagosatisfactorioMikrotik/{id}', function ( $id ) {
 
     //return view('externalviews.ver', ['newUser' => $newUser, ] );
     
-    if ($newUser['status'] == true)
+    if ($newUser['status']== true)
     {
-        return view('externalviews.pagosatisfactorioMikrotik', ['user' => $newUser['user'], 'password'  =>  $newUser['password'], 'status'  => 'exito'] );
+        return view('externalviews.pagosatisfactorioMikrotik', ['user' => $newUser['user'], 'password'  =>  $newUser['password']] );
     }else{
-        return view('externalviews.pagosatisfactorioMikrotik', ['user' => 'fallo', 'password'  =>  'fallo', 'status'  => 'exito'] );
+        return view('externalviews.pagosatisfactorioMikrotik', ['user' => 'fallo', 'password'  =>  'fallo'] );
     }
         
     
